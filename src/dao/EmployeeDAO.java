@@ -17,9 +17,23 @@ import model.Employee;
 public class EmployeeDAO {
 
 	// データベース接続に使用する情報
-	private final String JDBC_URL = "jdbc:h2:tcp://localhost/~/Documents/data/example";
+//	private final String JDBC_URL = "jdbc:h2:tcp://localhost/~/Documents/data/example";
 	private final String DB_USER = "sa";
 	private final String DB_PASS = "";
+
+	private String JDBC_URL = "jdbc:h2:"; // データベース接続時の指定する場合
+
+	public EmployeeDAO(String judge) { // データベース接続時の指定する場合
+		switch(judge) {
+		case "1":
+			JDBC_URL += "file:~/Documents/data/example";
+			break;
+
+		case "2":
+			JDBC_URL += "tcp://localhost/~/Documents/data/example";
+
+		}
+	}
 
 	public List<Employee> findAll(){
 		List<Employee> empList = new ArrayList<>();
